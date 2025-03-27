@@ -62,12 +62,34 @@ Veiculo2.apresentar()
 
 //carro, barco, aviao
 class Veiculo{
+    #velocidade
     constructor(tipo, modelo, cor, velocidade, passageiros){
         this.tipo = tipo;
         this.modelo = modelo;
         this.cor = cor;
-        this.velocidade = velocidade;
+        this.#velocidade = velocidade;
         this.passageiros = passageiros;
+    }
+    acelerar(){
+        this.#velocidade =10
+        console.log('vruuuum')
+    }
+    freiar(){
+        this.#velocidade -=5
+        console.log('niiiiiiii')
+    }
+    apresentar(){
+        console.log(`O ${this.tipo} de marca ${this.modelo} esta a ${this.velocidade} km/h`)
+    }
+    get velocidade(){
+        return this.#velocidade
+    }
+    set velocidade(valor){
+        if(valor<0){
+            console.log('ERRO, o valor nao pode ser menor que 0')
+        }else{
+            this.#velocidade +=valor
+        }
     }
 }
 
@@ -77,14 +99,13 @@ class Carro extends Veiculo{
         this.rodas =rodas
     }
     acelerar(){
-        this.velocidade +=10
+        this.velocidade =10
         console.log('vruuuum')
     }
     freiar(){
         this.velocidade -=5
         console.log('niiiiiiii')
     }
-    
 }
 let carro = new Carro("ford", "ranger antiga", "azul", 0, 2, 4)
 
@@ -95,7 +116,7 @@ class Barco extends Veiculo{
         this.casco =casco
     }
     acelerar(){
-        this.velocidade +=1
+        this.velocidade =1
         console.log('haaaaaannnnn')
     }
     freiar(){
@@ -111,7 +132,7 @@ class Aviao extends Veiculo{
         this.asas =asas
     }
     acelerar(){
-        this.velocidade +=40
+        this.velocidade =40
         console.log('zuuuuuuuuu')
     }
     freiar(){
